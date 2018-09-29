@@ -1,0 +1,16 @@
+
+.card{
+    float:left;
+    overflow:auto;
+    position:relative;
+    width:200px;
+    height:220px;
+}
+
+.hidden{
+    display:none;
+}
+
+.card:hover{
+    cursor:pointer;
+}
