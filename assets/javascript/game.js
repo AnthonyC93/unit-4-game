@@ -1,6 +1,7 @@
 //show 4 cards
 //pick one
 //make other 3 cards 
+var playCount = 0;
 var characters=[
     obi={
         name:"Obi Wan Kenobi",
@@ -121,10 +122,16 @@ $(document).ready(function(){
             $("#statusRow").html(newMessage);
 
             if(playerChoice.health<=0){
-                loseGame();
+
+                endGame();
             }else if(defender.health<=0){
+                playCount++;
                 $("#fighterRow").empty();
                 $("#statusRow").html("You Won! Pick another opponent");
+              
+              if(playCount===enemies.length){
+                endGame();
+              }
             }
         })
     })
@@ -242,7 +249,19 @@ function makeCard(character){
       
         return newCard;
 }
-function loseGame(){
-    $("body").empty();
-    $("body").append("<h1>You Lost =(</h1>")
+function endGame(){
+    $("#charRow").empty();
+  $("#fighterRow").empty();
+   $("#emptyRow").empty();
+    $("#statusRow").html("Game Over! Restart Game");
+  var restartButton = $("<button>");
+  restartButton.attr("id","restartButton");
+  restartButton.html("Restart");
+  
+  $("#fightPlace").html(restartButton)
+    // $("body").empty();
+    // $("body").append("<h1>You Lost =(</h1>")
+  $("#restartButton").on("click",function(){
+    history.go(0);
+  })
 }
